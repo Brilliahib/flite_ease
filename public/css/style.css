@@ -1,0 +1,160 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #fff;
+    color: var(--black-color);
+}
+
+:root {
+    --black-color: #000;
+    --green-color: #00ac69;
+    --yellow-color: yellow;
+    --gray-color: #7f7f7f;
+    --darkgray-color: #e3e6ec;
+    --grayblack-color: #687281;
+}
+
+nav {
+    background-color: #fff !important;
+    color: #7f7f7f !important;
+}
+
+nav button {
+    border: 0 !important;
+}
+
+nav ul li a {
+    color: var(--black-color) !important;
+    margin-left: 2rem;
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+}
+
+nav li.active a,
+nav li a.active {
+    color: #007cff !important;
+}
+
+nav ul li a :hover {
+    color: var(--yellow-color) !important;
+}
+
+nav .logo-text {
+    align-items: center;
+}
+
+nav .logo br {
+    color: var(--yellow-color) !important;
+}
+
+.nav-drop {
+    min-width: 45rem;
+    top: calc(100% + 5rem +0.5rem) !important;
+    left: -22rem !important;
+    margin: 1rem 0 !important;
+    border: 0;
+    box-shadow: 0 0.15rem 1.75rem rgba(31, 45, 65, 0.15);
+}
+
+.nav-col a {
+    margin-left: 0 !important;
+}
+
+nav .dropdown-menu a {
+    font-size: 0.8rem !important;
+    color: #1f2d41 !important;
+    font-weight: 300 !important;
+}
+
+nav .dropdown-menu a:active {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+nav .dropdown-menu a:hover {
+    color: #687281 !important;
+    background-color: transparent !important;
+}
+
+.dropdown .dropdown-toggle .dropdown-arrow {
+    margin-left: auto;
+    margin-right: -0.5rem;
+    font-size: 0.6rem !important;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.hero {
+    background-color: #f4f7fe;
+}
+
+.hero-section {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.tiket-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.card-tiket {
+    background-color: #fff !important;
+    width: 100% !important;
+}
+
+.search-tiket-section {
+    padding: 48px 0;
+}
+
+.home {
+    background-image: url(https://images.unsplash.com/photo-1531045535792-b515d59c3d1f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-position: center;
+    background-size: cover;
+}
+
+.card-form {
+    background-color: #f4f7fe;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.main-form {
+    background-color: #f4f7fe;
+}
+
+.btn {
+    background-color: #007cff;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.btn:hover {
+    background-color: #3597ff;
+    color: #fff;
+}
+
+.card-pemesanan {
+    width: 100%;
+}
+
+.pesanan-section {
+    padding: 4rem 0;
+}
+
+.riwayat {
+    min-height: 90vh;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+}
+
+.kode-booking {
+    color: #6f6f6f !important;
+}
