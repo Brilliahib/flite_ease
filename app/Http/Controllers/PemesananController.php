@@ -29,22 +29,26 @@ class PemesananController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'nama' => 'required',
-            'email' => 'required',
-            'nomor_telepon' => 'required',
-            'bandara_asal' => 'required',
-            'bandara_tujuan' => 'required',
-            'tanggal_keberangkatan'=>'nullable'
-        ]);
+{
+    $validatedData = $request->validate([
+        'nama_pemesan' => 'required',
+        'tiket_id' => 'required',
+        'jumlah_tiket' => 'required',
+        'harga_tiket' => 'required',
+        'tanggal_keberangkatan' => 'nullable',
+    ]);
 
-        $validatedData['kode_booking'] = Str::random(8);
+    $validatedData['kode_booking'] = Str::random(8);
 
-        Pemesanan::create($validatedData);
+    Pemesanan::create($validatedData);
 
-        return redirect('/cari-tiket/formulir/detail');
-    }
+    // Dapatkan data pemesanan yang baru saja dibuat
+    $pemesanan = Pemesanan::latest()->first();
+
+    // Tampilkan halaman pembayaran dengan menggunakan metode show() dari PaymentController
+    return app()->make(PaymentController::class)->show($pemesanan);
+}
+
 
     /**
      * Display the specified resource.
@@ -78,20 +82,38 @@ class PemesananController extends Controller
         //
     }
 
-    public function cariTiket(Request $request){
+    public function cariDanAmbilTiket(Request $request)
+    {
         $validatedData = $request->validate([
             'bandara_asal' => 'required|string',
             'bandara_tujuan' => 'required|string',
             'tanggal_keberangkatan' => 'required|date',
+            // 'tiket_id' => 'required',
+            'harga_tiket' => 'required',
         ]);
 
         // Lakukan pencarian berdasarkan input yang diberikan
-        $results = Tiket::where('bandara_asal', $validatedData['bandara_asal'])
-                        ->where('bandara_tujuan', $validatedData['bandara_tujuan'])
-                        ->whereDate('tanggal_keberangkatan', $validatedData['tanggal_keberangkatan'])
-                        ->get();
+        $results = Tiket::where('bandaraasal_id', $validatedData['bandara_asal'])
+            ->where('bandaratujuan_id', $validatedData['bandara_tujuan'])
+            ->where('harga_tiket', $validatedData['harga_tiket'])
+            // ->where('tiket_id', $validatedData['tiket_id'])
+            ->whereDate('tanggal_keberangkatan', $validatedData['tanggal_keberangkatan'])
+            ->get();
 
-        // Kirim hasil pencarian ke halaman hasil
-        return view('pemesanan', compact('results'));
+        $hargaTiket = null;
+
+        if ($request->has('tiket_id')) {
+            // Jika ada tiket_id yang dikirimkan, ambil harga tiket
+            $tiketId = $request->input('tiket_id');
+
+            // Temukan tiket dengan tiket_id yang sesuai
+            $selectedTicket = Tiket::find($tiketId);
+
+            // Pastikan tiket ditemukan sebelum menarik harga_tiket
+            $hargaTiket = $selectedTicket ? $selectedTicket->harga_tiket : null;
+        }
+
+        // Kirim hasil pencarian dan harga tiket ke halaman pemesanan
+        return view('pemesanan', compact('results', 'hargaTiket'));
     }
 }

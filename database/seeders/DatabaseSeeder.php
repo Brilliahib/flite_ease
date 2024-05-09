@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Bandara;
+use App\Models\Pesawat;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -23,6 +26,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Akhila Zahra',
             'email' => 'akhilazahra03@gmail.com',
             'password' => bcrypt('khilacantik')
+        ]);
+
+        Bandara::create([
+                'nama_bandara' => 'Yogyakarta International Airport',
+                'kota_bandara' => 'Yogyakarta'
         ]);
     }
 }

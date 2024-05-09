@@ -2,7 +2,7 @@ html,
 body {
     padding: 0;
     margin: 0;
-    font-family: "Poppins", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     background-color: #fff;
     color: var(--black-color);
 }
@@ -14,6 +14,26 @@ body {
     --gray-color: #7f7f7f;
     --darkgray-color: #e3e6ec;
     --grayblack-color: #687281;
+}
+
+.text-gray {
+    color: #6c757d;
+}
+
+.text-big {
+    font-size: 24px !important;
+}
+
+.text-base {
+    font-size: 16px !important;
+}
+
+.text-small {
+    font-size: 14px !important;
+}
+
+.border {
+    border: 1.5px solid #e7e7ec !important;
 }
 
 nav {

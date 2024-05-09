@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pemesanan extends Model
+class Bandara extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
 
     public function tiket(){
-        return $this->belongsTo(Tiket::class);
+        return $this->hasMany(Tiket::class);
     }
 }

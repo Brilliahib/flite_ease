@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('tikets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pesawat_id');
+            $table->foreignId('bandaratujuan_id');
+            $table->foreignId('bandaraasal_id');
             $table->string('nama');
-            $table->string('bandara_asal');
-            $table->string('bandara_tujuan');
+            $table->decimal('harga_tiket', 10, 2);
             $table->dateTime('tanggal_keberangkatan');
             $table->time('jam_berangkat');
             $table->time('jam_tiba');

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tiket; // Pastikan Anda mengganti App\Models\Tiket dengan namespace yang sesuai dengan model tiket Anda
+use App\Models\Tiket;
+use App\Models\Pesawat;
 
 class TiketController extends Controller
 {
@@ -17,9 +18,10 @@ class TiketController extends Controller
         ]);
 
         // Lakukan pencarian berdasarkan input yang diberikan
-        $results = Tiket::where('bandara_asal', $validatedData['bandara_asal'])
-                        ->where('bandara_tujuan', $validatedData['bandara_tujuan'])
+        $results = Tiket::where('bandaraasal_id', $validatedData['bandara_asal'])
+                        ->where('bandaratujuan_id', $validatedData['bandara_tujuan'])
                         ->whereDate('tanggal_keberangkatan', $validatedData['tanggal_keberangkatan'])
+                        ->with('pesawat') // Load relasi pesawat
                         ->get();
 
         // Kirim hasil pencarian ke halaman hasil

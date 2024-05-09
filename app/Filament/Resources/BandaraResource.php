@@ -2,25 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PemesananResource\Pages;
-use App\Filament\Resources\PemesananResource\RelationManagers;
-use App\Models\Pemesanan;
+use App\Filament\Resources\BandaraResource\Pages;
+use App\Filament\Resources\BandaraResource\RelationManagers;
+use App\Models\Bandara;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\TimePicker;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PemesananResource extends Resource
+class BandaraResource extends Resource
 {
-    protected static ?string $model = Pemesanan::class;
+    protected static ?string $model = Bandara::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -28,11 +27,10 @@ class PemesananResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('id'),
-                TextInput::make('kode_booking'),
-                TextInput::make('nama_pemesan'),
-                TextInput::make('tiket_id'),
-                TextInput::make('harga_tiket'),
+                Card::make()->schema([
+                    TextInput::make('nama_bandara'),
+                    TextInput::make('kota_bandara'),
+                    ])
             ]);
     }
 
@@ -50,10 +48,10 @@ class PemesananResource extends Resource
                         );
                     }
                 ),
-                TextColumn::make('kode_booking'),
-                TextColumn::make('nama_pemesan'),
-                TextColumn::make('tiket_id'),
-                TextColumn::make('harga_tiket'),
+                TextColumn::make('nama_bandara')
+                    ->label('Nama Bandara'),
+                TextColumn::make('kota_bandara')
+                    ->label("Kota Bandara"),
             ])
             ->filters([
                 //
@@ -78,9 +76,9 @@ class PemesananResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPemesanans::route('/'),
-            'create' => Pages\CreatePemesanan::route('/create'),
-            'edit' => Pages\EditPemesanan::route('/{record}/edit'),
+            'index' => Pages\ListBandaras::route('/'),
+            'create' => Pages\CreateBandara::route('/create'),
+            'edit' => Pages\EditBandara::route('/{record}/edit'),
         ];
     }
 }
